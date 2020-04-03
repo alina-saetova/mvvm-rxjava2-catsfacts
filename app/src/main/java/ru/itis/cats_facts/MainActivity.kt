@@ -7,12 +7,22 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_main.*
+import ru.itis.cats_facts.di.Injectable
 import ru.itis.cats_facts.view.FavouritesFragment
-import ru.itis.cats_facts.view.SearchFragment
+import ru.itis.cats_facts.view.CategoriesFragment
+import javax.inject.Inject
 
+class MainActivity : AppCompatActivity(),
+    HasAndroidInjector,
+    Injectable {
 
-class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector() = dispatchingAndroidInjector
 
     private val titles = arrayOf("Search", "Favourites")
 
@@ -37,7 +47,7 @@ class ViewPagerAdapter(mainActivity: MainActivity) : FragmentStateAdapter(mainAc
 
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            0 -> return SearchFragment()
+            0 -> return CategoriesFragment()
             1 -> return FavouritesFragment()
         }
         return FavouritesFragment()

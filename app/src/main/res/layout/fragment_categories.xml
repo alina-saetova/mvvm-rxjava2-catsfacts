@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="ru.itis.cats_facts.viewmodel.CategoriesViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.CategoriesFragment"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textColor="@color/colorBlack"
+            android:text="Choose a category" />
+
+        <Button
+            android:id="@+id/btn_boxes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="boxes"
+            android:background="@drawable/button_background"
+            style="@style/CategoryButtonStyle"/>
+
+        <Button
+            android:id="@+id/btn_clothes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="clothes"
+            android:background="@drawable/button_background"
+            style="@style/CategoryButtonStyle"/>
+
+        <Button
+            android:id="@+id/btn_hats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hats"
+            android:background="@drawable/button_background"
+            style="@style/CategoryButtonStyle" />
+
+        <Button
+            android:id="@+id/btn_sinks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sinks"
+            android:background="@drawable/button_background"
+            style="@style/CategoryButtonStyle"/>
+
+        <Button
+            android:id="@+id/btn_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="space"
+            android:background="@drawable/button_background"
+            style="@style/CategoryButtonStyle"/>
+
+        <Button
+            android:id="@+id/btn_sunglasses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sunglasses"
+            android:background="@drawable/button_background"
+            style="@style/CategoryButtonStyle"/>
+
+        <Button
+            android:id="@+id/btn_ties"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ties"
+            android:background="@drawable/button_background"
+            style="@style/CategoryButtonStyle"/>
+
+    </LinearLayout>
+</layout>
