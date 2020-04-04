@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="viewModel"
-            type="ru.itis.cats_facts.viewmodel.CategoriesViewModel" />
+
     </data>
 
     <LinearLayout

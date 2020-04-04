@@ -29,11 +29,4 @@ abstract class ViewModelModule {
     abstract fun bindDetailsViewModel(
         detailsViewModel: DetailsViewModel
     ): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(CategoriesViewModel::class)
-    abstract fun bindCategoriesViewModel(
-        categoriesViewModel: CategoriesViewModel
-    ): ViewModel
 }

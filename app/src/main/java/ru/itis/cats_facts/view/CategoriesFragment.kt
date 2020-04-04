@@ -7,18 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.lifecycle.ViewModelProvider
 import ru.itis.cats_facts.DetailsActivity
 import ru.itis.cats_facts.databinding.FragmentCategoriesBinding
 import ru.itis.cats_facts.di.Injectable
-import ru.itis.cats_facts.viewmodel.CategoriesViewModel
-import javax.inject.Inject
 
 class CategoriesFragment : Fragment(), Injectable {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel: CategoriesViewModel
     lateinit var binding: FragmentCategoriesBinding
 
     override fun onCreateView(
@@ -26,9 +20,6 @@ class CategoriesFragment : Fragment(), Injectable {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCategoriesBinding.inflate(inflater)
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(CategoriesViewModel::class.java)
-        binding.viewModel = viewModel
 
         setButtons()
         return binding.root
