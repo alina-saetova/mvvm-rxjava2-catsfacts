@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.internal.util.NotificationLite.disposable
-import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import ru.itis.cats_facts.data.model.CatItem
 import ru.itis.cats_facts.data.model.LoadingStatus
@@ -27,6 +25,10 @@ class DetailsViewModel @Inject constructor(val repository: CatFactRepository): V
     val progress: LiveData<LoadingStatus>
         get() = _progress
 
+    private var _saving = MutableLiveData<Boolean>()
+    val saving: LiveData<Boolean>
+        get() = _saving
+
     fun loadCatFacts(categoryId: Int) {
         _progress.value = LoadingStatus.RUNNING
         disposables.add(repository.getCatFacts(categoryId)
@@ -39,7 +41,19 @@ class DetailsViewModel @Inject constructor(val repository: CatFactRepository): V
                 _progress.value = LoadingStatus.FAILED
             })
         )
+    }
 
+    //TODO
+
+    fun like(catItem: CatItem) {
+        disposables.add(repository.saveCatItem(catItem)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe ({
+                _saving.value = true
+            }, {
+            _saving.value = false
+        }))
     }
 
     override fun onCleared() {

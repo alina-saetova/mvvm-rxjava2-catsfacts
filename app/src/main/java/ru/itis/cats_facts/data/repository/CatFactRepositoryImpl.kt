@@ -1,10 +1,12 @@
 package ru.itis.cats_facts.data.repository
 
 import android.util.Log
+import io.reactivex.Completable
+import io.reactivex.Scheduler
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
-import io.reactivex.functions.Function
-import io.reactivex.functions.Function3
+import io.reactivex.schedulers.Schedulers
 import ru.itis.cats_facts.data.local.dao.CatItemDao
 import ru.itis.cats_facts.data.model.CatItem
 import ru.itis.cats_facts.data.model.FactsResponse
@@ -22,7 +24,7 @@ class CatFactRepositoryImpl @Inject constructor(
 ) : CatFactRepository {
 
     override fun getFavourites(): Single<List<CatItem>> {
-        TODO("Not yet implemented")
+        return dao.getAll()
     }
 
     override fun getCatFacts(category_id: Int): Single<List<CatItem>> {
@@ -31,6 +33,14 @@ class CatFactRepositoryImpl @Inject constructor(
             apiPictures.getRandomPictures(category_id.toString()),
             BiFunction { facts, pictures -> fromResponseToModel(pictures, facts) }
         )
+    }
+
+    override fun saveCatItem(catItem: CatItem): Completable {
+        return dao.insert(catItem)
+    }
+
+    override fun deleteFavourite(catItem: CatItem): Completable {
+        return dao.delete(catItem)
     }
 
     private fun fromResponseToModel(

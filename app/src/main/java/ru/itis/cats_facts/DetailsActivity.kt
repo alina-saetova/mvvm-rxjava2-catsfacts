@@ -3,6 +3,7 @@ package ru.itis.cats_facts
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -15,10 +16,11 @@ import ru.itis.cats_facts.data.model.LoadingStatus
 import ru.itis.cats_facts.databinding.ActivityDetailsBinding
 import ru.itis.cats_facts.di.Injectable
 import ru.itis.cats_facts.view.adapter.CatFactAdapter
+import ru.itis.cats_facts.view.adapter.CatItemLikeListener
 import ru.itis.cats_facts.viewmodel.DetailsViewModel
 import javax.inject.Inject
 
-class DetailsActivity : AppCompatActivity(), HasAndroidInjector,Injectable {
+class DetailsActivity : AppCompatActivity(), CatItemLikeListener, HasAndroidInjector, Injectable {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
@@ -33,7 +35,7 @@ class DetailsActivity : AppCompatActivity(), HasAndroidInjector,Injectable {
         super.onCreate(savedInstanceState)
         setContentView( R.layout.activity_details)
 
-        val adapter = CatFactAdapter(emptyList<CatItem>().toMutableList())
+        val adapter = CatFactAdapter(emptyList<CatItem>().toMutableList(), this)
         recyclerView.adapter = adapter
 
         viewModel = ViewModelProvider(this, viewModelFactory)
@@ -62,5 +64,18 @@ class DetailsActivity : AppCompatActivity(), HasAndroidInjector,Injectable {
         viewModel.items.observe(this, Observer { list ->
             (recyclerView.adapter as CatFactAdapter).update(list.toMutableList())
         })
+
+        viewModel.saving.observe(this, Observer { flag ->
+            val toast = if (flag) {
+                "Your cat-fact was successfully saved :)"
+            } else {
+                "Oops, failed"
+            }
+            Toast.makeText(this, toast, Toast.LENGTH_LONG).show()
+        })
+    }
+
+    override fun like(catItem: CatItem) {
+        viewModel.like(catItem)
     }
 }

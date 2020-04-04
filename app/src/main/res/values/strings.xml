@@ -5,4 +5,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_category">Select the category</string>
+    <string name="btn_boxes">boxes</string>
+    <string name="btn_clothes">clothes</string>
+    <string name="btn_hats">hats</string>
+    <string name="btn_sinks">sinks</string>
+    <string name="btn_space">space</string>
+    <string name="btn_sunglasses">sunglasses</string>
+    <string name="btn_ties">ties</string>
 </resources>

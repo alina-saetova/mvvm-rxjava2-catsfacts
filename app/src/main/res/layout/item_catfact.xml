@@ -32,5 +32,11 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"/>
 
+        <Button
+            android:id="@+id/btn_like"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="save" />
+
     </LinearLayout>
 </layout>
