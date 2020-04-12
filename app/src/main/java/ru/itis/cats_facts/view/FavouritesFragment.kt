@@ -8,23 +8,26 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_details.*
-import ru.itis.cats_facts.R
 import ru.itis.cats_facts.data.model.CatItem
 import ru.itis.cats_facts.data.model.LoadingStatus
 import ru.itis.cats_facts.databinding.FragmentFavouritesBinding
-import ru.itis.cats_facts.di.Injectable
-import ru.itis.cats_facts.view.adapter.CatFactAdapter
+import ru.itis.cats_facts.di.App
 import ru.itis.cats_facts.view.adapter.CatItemDeleteListener
 import ru.itis.cats_facts.view.adapter.FavouriteAdapter
 import ru.itis.cats_facts.viewmodel.FavouritesViewModel
 import javax.inject.Inject
 
-class FavouritesFragment : Fragment(), CatItemDeleteListener, Injectable {
+class FavouritesFragment : Fragment(), CatItemDeleteListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: FavouritesViewModel
     lateinit var binding: FragmentFavouritesBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        App.component.favouritesComponentBuilder().build().inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

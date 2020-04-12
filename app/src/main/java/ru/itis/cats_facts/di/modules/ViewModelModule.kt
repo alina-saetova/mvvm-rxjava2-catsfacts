@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import ru.itis.cats_facts.di.ScreenScope
 import ru.itis.cats_facts.di.ViewModelKey
 import ru.itis.cats_facts.viewmodel.*
 
@@ -15,18 +16,4 @@ abstract class ViewModelModule {
     abstract fun bindViewModelFactory(
         factory: AppViewModelFactory
     ): ViewModelProvider.Factory
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(FavouritesViewModel::class)
-    abstract fun bindFavouritesViewModel(
-        favouritesViewModel: FavouritesViewModel
-    ): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(DetailsViewModel::class)
-    abstract fun bindDetailsViewModel(
-        detailsViewModel: DetailsViewModel
-    ): ViewModel
 }

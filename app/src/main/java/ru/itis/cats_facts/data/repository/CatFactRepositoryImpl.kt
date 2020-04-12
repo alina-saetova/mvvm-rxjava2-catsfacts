@@ -1,12 +1,8 @@
 package ru.itis.cats_facts.data.repository
 
-import android.util.Log
 import io.reactivex.Completable
-import io.reactivex.Scheduler
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
-import io.reactivex.schedulers.Schedulers
 import ru.itis.cats_facts.data.local.dao.CatItemDao
 import ru.itis.cats_facts.data.model.CatItem
 import ru.itis.cats_facts.data.model.FactsResponse

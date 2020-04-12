@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.view.isVisible
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dagger.android.DispatchingAndroidInjector
@@ -13,25 +11,21 @@ import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_details.*
 import ru.itis.cats_facts.data.model.CatItem
 import ru.itis.cats_facts.data.model.LoadingStatus
-import ru.itis.cats_facts.databinding.ActivityDetailsBinding
-import ru.itis.cats_facts.di.Injectable
+import ru.itis.cats_facts.di.App
 import ru.itis.cats_facts.view.adapter.CatFactAdapter
 import ru.itis.cats_facts.view.adapter.CatItemLikeListener
 import ru.itis.cats_facts.viewmodel.DetailsViewModel
 import javax.inject.Inject
 
-class DetailsActivity : AppCompatActivity(), CatItemLikeListener, HasAndroidInjector, Injectable {
-
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
-
-    override fun androidInjector() = dispatchingAndroidInjector
+class DetailsActivity : AppCompatActivity(), CatItemLikeListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: DetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.component.detailsComponentBuilder().build().inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView( R.layout.activity_details)
 

@@ -10,23 +10,18 @@ import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrate
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_main.*
-import ru.itis.cats_facts.di.Injectable
+import ru.itis.cats_facts.di.App
 import ru.itis.cats_facts.view.FavouritesFragment
 import ru.itis.cats_facts.view.CategoriesFragment
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(),
-    HasAndroidInjector,
-    Injectable {
-
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
-
-    override fun androidInjector() = dispatchingAndroidInjector
+class MainActivity : AppCompatActivity() {
 
     private val titles = arrayOf("Search", "Favourites")
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.component.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

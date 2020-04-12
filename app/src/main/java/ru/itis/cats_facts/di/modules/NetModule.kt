@@ -17,13 +17,6 @@ import ru.itis.cats_facts.data.repository.CatFactRepositoryImpl
 import javax.inject.Named
 import javax.inject.Singleton
 
-@Module(includes = [NetModule::class])
-abstract class RemoteSourceModule {
-    @Binds
-    @Singleton
-    abstract fun bindCatFactRepository(catFactRepositoryImpl: CatFactRepositoryImpl): CatFactRepository
-}
-
 @Module
 class NetModule {
 

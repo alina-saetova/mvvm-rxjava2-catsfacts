@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import ru.itis.cats_facts.DetailsActivity
 import ru.itis.cats_facts.databinding.FragmentCategoriesBinding
-import ru.itis.cats_facts.di.Injectable
+import ru.itis.cats_facts.di.App
 
-class CategoriesFragment : Fragment(), Injectable {
+class CategoriesFragment : Fragment() {
 
     lateinit var binding: FragmentCategoriesBinding
 

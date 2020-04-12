@@ -1,20 +1,21 @@
 package ru.itis.cats_facts.di
 
 import android.app.Application
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
-import javax.inject.Inject
+import ru.itis.cats_facts.di.components.AppComponent
+import ru.itis.cats_facts.di.components.DaggerAppComponent
 
+class App: Application() {
 
-class App: Application(), HasAndroidInjector {
-
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
+    companion object {
+        lateinit var component: AppComponent
+    }
 
     override fun onCreate() {
         super.onCreate()
-        AppInjector.init(this)
-    }
+        component = DaggerAppComponent.builder()
+            .application(this)
+            .build()
 
-    override fun androidInjector(): DispatchingAndroidInjector<Any> = dispatchingAndroidInjector
+        component.inject(this)
+    }
 }

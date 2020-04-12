@@ -10,9 +10,10 @@ import io.reactivex.schedulers.Schedulers
 import ru.itis.cats_facts.data.model.CatItem
 import ru.itis.cats_facts.data.model.LoadingStatus
 import ru.itis.cats_facts.data.repository.CatFactRepository
+import ru.itis.cats_facts.di.ScreenScope
 import javax.inject.Inject
 
-
+@ScreenScope
 class DetailsViewModel @Inject constructor(val repository: CatFactRepository): ViewModel() {
 
     private val disposables = CompositeDisposable()
